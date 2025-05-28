@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Hair, No Problem</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background">
+    <!-- Language Selector -->
+    <select id="language-selector" aria-label="Language">
+      <option value="en">🇬🇧 English</option>
+      <option value="nl">🇳🇱 Nederlands</option>
+      <option value="fr">🇫🇷 Français</option>
+    </select>
+
+    <!-- Translatable Content -->
+    <h1 id="headline">Welcome to my .hair domain</h1>
+    <p class="tagline" id="tagline" title="Bald heads are 23% more aerodynamic.">Spoiler: I don't need it 😎</p>
+
+    <a href="https://www.twitch.tv/subs/dam0un" target="_blank" class="wig-button" id="wig-button">
+      💸 Buy me a wig
+    </a>
+
+    <!-- Falling .hair elements -->
+    <div class="falling-hair-zone">
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+      <span class="falling-hair">.hair</span>
+    </div>
+
+    <div class="scalp-container">
+      <img src="head.png" alt="My Glorious Scalp" class="bouncy-scalp" />
+    </div>
+  </div>
+
+  <script>
+  const translations = {
+    en: {
+      headline: "Welcome to my .hair domain",
+      tagline: "Spoiler: I don't need it 😎",
+      button: "💸 Buy me a wig"
+    },
+    nl: {
+      headline: "Welkom op mijn .hair domein",
+      tagline: "Spoiler: ik heb het niet nodig 😎",
+      button: "💸 Koop een pruik voor mij"
+    },
+    fr: {
+      headline: "Bienvenue sur mon domaine .hair",
+      tagline: "Spoiler : je n’en ai pas besoin 😎",
+      button: "💸 M’acheter une perruque"
+    }
+  };
+
+  const selector = document.getElementById("language-selector");
+  const headline = document.getElementById("headline");
+  const tagline = document.getElementById("tagline");
+  const button = document.getElementById("wig-button");
+
+  function applyLanguage(lang) {
+    const fallbackLang = "en";
+    const chosen = translations[lang] || translations[lang.slice(0, 2)] || translations[fallbackLang];
+    selector.value = lang.slice(0, 2) in translations ? lang.slice(0, 2) : fallbackLang;
+    headline.textContent = chosen.headline;
+    tagline.textContent = chosen.tagline;
+    button.textContent = chosen.button;
+  }
+
+  selector.addEventListener("change", () => {
+    applyLanguage(selector.value);
+  });
+
+  // Detect browser language on page load
+  window.addEventListener("DOMContentLoaded", () => {
+    const browserLang = navigator.language || navigator.userLanguage || "en";
+    applyLanguage(browserLang);
+  });
+
+  console.log("%c 🧑‍🦲 Welcome, fellow follicle-free friend!", "font-size: 16px; color: #419BFF; font-weight: bold;");
+</script>
+</body>
+</html>
